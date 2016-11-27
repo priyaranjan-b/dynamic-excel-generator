@@ -1,6 +1,6 @@
 # dynamic-excel-generator
 
-One Paragraph of project description goes here
+Its generic utility which generates excel file dinamically irrespective of type (POJO)
 
 ## Getting Started
 
@@ -8,80 +8,31 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Dependency required are : apache POI, Google Guava
+
+
+## How to use
+In the project there are 2 type of implementation present.
+
+### 1 : Without Annotation - This implementation will allow any kind of POJO to generate excel sheet.
+  ```
+		Employee e = new Employee("Priyaranjan", "B", 106221, "Production", 50000000.00);
+		List<Employee> employeeList = new ArrayList<Employee>();
+		employeeList.add(e);
+		GenerateExcelFile<Employee> generator = new GenerateExcelFile<>();
+		generator.setHeaderTextStyle(CaseFormat.UPPER_UNDERSCORE);
+		generator.isHeaderBold(true);
+		generator.createExcel(employeeList);
+```
+Here every customization fileds are  is optional only use if customazation is required.  such as you don't have to write below code if you want default behaviour.
+```
+		generator.setHeaderTextStyle(CaseFormat.UPPER_UNDERSCORE);
+		generator.isHeaderBold(true);
+```
+If user want to store file in some specified location in the default directory. Then use parameterized constructor instead of default constructor.
 
 ```
-Give examples
+	GenerateExcelFile<Employee> generator = new GenerateExcelFile<>("C:\user\username\directory_name", "file_name.xls");
 ```
 
-### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
