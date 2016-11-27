@@ -1,10 +1,6 @@
 # dynamic-excel-generator
 
-Its generic utility which generates excel file dinamically irrespective of type (POJO)
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Its a generic utility which generates excel file dinamically irrespective of type (POJO).
 
 ### Prerequisites
 
@@ -35,4 +31,45 @@ If user want to store file in some specified location in the default directory. 
 	GenerateExcelFile<Employee> generator = new GenerateExcelFile<>("C:\user\username\directory_name", "file_name.xls");
 ```
 
+### 2 : With Annotation - This implementation will allow only POJO having @Excel annotation to generate excel sheet.
+If the POJO doesn't contain @Excel annotation this utility will do nothing
+Similarly all the fields should be annotated with @ExcelColumn. (Those fields doesn't contain @ExcelColumn anootation will be skipped)
+All the parameter of above 2 annotation are optional. Give parameter value if you don't want the default behaviour.
+Below is the syntax of POJO
+  ```
+@Excel(name="Student_Details.xls",sheetName="Students",dir="E:/test"
+,style=@ExcelStyle())
+public class Student {
+	
+	@ExcelColumn(name="ROLL NUMBER")
+	private long rollNumber;
+	
+	@ExcelColumn(name="FIRST NAME")
+	private String firstName;
+	
+	@ExcelColumn(name="LAST NAME")
+	private String lastName;
+	
+	@ExcelColumn(name="GRADE")
+	private String grade;
+	
+	@ExcelColumn(name="MARKS (PERCENTAGE)")
+	private double percentage;
+```
+#### @Excel
+	If name is not provided then the file name will be same as class name. 
+	If dir value  is not provided the it will use the default directory as specified in the @Excel annotation.
+#### @ExcelColumn
+	if name is not provided it will take filed name as header name.
+#### @ExcelStyle
+	With this annotation you can customize excel styling like FONT, FONT SIZE , bold header font, hiding grid and may mode.
+	All the params are optional.
 
+Here is how to use annotation based excel report generator
+```
+		List<Student> studentList = new ArrayList<>();
+		studentList.add(new Student(12345, "Priyaranjan", "Behera", "7th", 90.82));
+		studentList.add(new Student(12345, "biplab", "pati", "6th", 98.82));
+		GenerateExcelReport<Student> generator = new GenerateExcelReport<>();
+		generator.createExcel(studentList);
+```
