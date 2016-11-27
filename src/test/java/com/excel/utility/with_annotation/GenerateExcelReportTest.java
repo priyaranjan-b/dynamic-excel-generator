@@ -7,16 +7,15 @@ import org.junit.Test;
 
 import com.excel.utility.models.Student;
 
-public class GenerateExcelFileTest {
+public class GenerateExcelReportTest {
 	
 	
 	@Test
 	public void test_generator(){
-		Student std = new Student(12345, "Priyaranjan", "Behera", "7th", 90.82);
-		List<Student> employeeList = new ArrayList<>();
-		employeeList.add(std);
-		employeeList.add(new Student(12345, "biplab", "pati", "6th", 98.82));
+		List<Student> studentList = new ArrayList<>();
+		studentList.add(new Student(12345, "Priyaranjan", "Behera", "7th", 90.82));
+		studentList.add(new Student(12345, "biplab", "pati", "6th", 98.82));
 		GenerateExcelReport<Student> generator = new GenerateExcelReport<>();
-		generator.createExcel(employeeList);
+		generator.createExcel(studentList);
 	}
 }
